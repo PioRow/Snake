@@ -34,8 +34,8 @@ namespace Snake
             Text gameStartText = new Text
             {
                 Font = new Font("arial.ttf"),
-                DisplayedString = "Snake\npress space to start",
-                Position = new Vector2f(200, 200),
+                DisplayedString = "         Snake\npress space to start",
+                Position = new Vector2f(100, 200),
                 FillColor = Color.Magenta
             };
             while (_mainWindow.IsOpen)
@@ -46,7 +46,6 @@ namespace Snake
 
                 if (_isStarted)
                 {
-                   
                     clock.Restart();
                    _isStarted= _snake.updateSnakePosition(out _grew,_field);                    
                     _snake.Draw(_mainWindow);
@@ -56,7 +55,6 @@ namespace Snake
                     while (clock.ElapsedTime.AsMilliseconds() <= 500)
                     {
                         _mainWindow.DispatchEvents();
-                        //_mainWindow.Display();
                     }
                     
                 }
@@ -79,7 +77,6 @@ namespace Snake
                 if (_field[x, y] == 0)
                 {
                     _field[x, y] = 2;
-                    Console.WriteLine(x + " " + y);
                     toPlace = false;
                 }
             }

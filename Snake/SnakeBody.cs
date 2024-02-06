@@ -44,15 +44,27 @@ namespace Snake
             grew = false;
             if (_body[0].X < 9 && _body[0].X >= 0 && _body[0].Y < 9 && _body[0].Y >= 0)
             {
-
-                field[(int)_body[0].X, (int)_body[0].Y] = 0;
-                _body[0] += _velocity;
-                if (field[(int)_body[0].X, (int)_body[0].Y] == 1)
-                    return false;
-                else if(field[(int)_body[0].X, (int)_body[0].Y] == 2)
+                for(int i=0;i<_length;i++)
+                {
+                    field[(int)_body[i].X,(int)_body[i].Y] = 0;
+                }
+                if (field[(int)(_body[0].X+_velocity.X), (int)(_body[0].Y+_velocity.Y)] == 2)
                 {
                     grew = true;
+                    _length++;
                 }
+                for(int i=_length-1; i>=1; i--)
+                {
+                    _body[i] = _body[i - 1];
+                }
+                _body[0] += _velocity;
+                for (int i = 1; i < _length; i++)
+                {
+                    field[(int)_body[i].X, (int)_body[i].Y] = 1;
+                }
+
+                if (field[(int)_body[0].X, (int)_body[0].Y] == 1)
+                    return false;
                 field[(int)_body[0].X, (int)_body[0].Y] = 1;
 
                 return true;
