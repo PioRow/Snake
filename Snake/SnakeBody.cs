@@ -39,12 +39,22 @@ namespace Snake
             if (k == Keyboard.Key.Down)
                 _velocity.Y = 1;
         }
-        public bool updateSnakePosition()
+        public bool updateSnakePosition(out bool grew,int[,] field)
         {
+            grew = false;
             if (_body[0].X < 9 && _body[0].X >= 0 && _body[0].Y < 9 && _body[0].Y >= 0)
             {
+
+                field[(int)_body[0].X, (int)_body[0].Y] = 0;
                 _body[0] += _velocity;
-                Console.WriteLine(_body[0].X + " " + _body[0].Y);
+                if (field[(int)_body[0].X, (int)_body[0].Y] == 1)
+                    return false;
+                else if(field[(int)_body[0].X, (int)_body[0].Y] == 2)
+                {
+                    grew = true;
+                }
+                field[(int)_body[0].X, (int)_body[0].Y] = 1;
+
                 return true;
             }
             return false;
